@@ -42,7 +42,7 @@ public class Calculator {
 		String s = tokens[0];
 
 		if (!s.equalsIgnoreCase("negate") && !s.equalsIgnoreCase("halve")) {
-			throw new CalculatorException("Invalid command");
+			throw new CalculatorException("Illegal Command");
 		} else {
 			if (s.equalsIgnoreCase("negate")) {
 				a = -a;
@@ -99,7 +99,7 @@ public class Calculator {
 		if (operand.equals("/") && num2 == 0) {
 			throw new ArithmeticException("Divide by 0 error");
 		} else if (!operand.equals("+") && !operand.equals("-") && !operand.equals("/")) {
-			throw new CalculatorException("Invalid command");
+			throw new CalculatorException("Illegal Command");
 		} else {
 			if (operand.equals("+")) {
 				num3 = num1 + num2;
@@ -168,7 +168,7 @@ public class Calculator {
 		case 2:
 			int a = Integer.parseInt(tokens[1]);
 			if (!tokens[0].equalsIgnoreCase("negate") && !tokens[0].equalsIgnoreCase("halve")) {
-				throw new CalculatorException("Invalid Command");
+				throw new CalculatorException("Illegal Command");
 			} else {
 				return calculateTwoTokens(tokens);
 			}
@@ -179,7 +179,7 @@ public class Calculator {
 			if (tokens[1].equals("/") && num2 == 0) {
 				throw new ArithmeticException("Divide by 0 error");
 			} else if (!tokens[1].equals("+") && !tokens[1].equals("-") && !tokens[1].equals("/")) {
-				throw new CalculatorException("Invalid command");
+				throw new CalculatorException("Illegal Command");
 			}
 			else {
 				return calculateThreeTokens(tokens);
