@@ -47,9 +47,8 @@ public class Calculator {
 			if (s.equalsIgnoreCase("negate")) {
 				a = -a;
 				return a;
-			}
-			else if (s.equalsIgnoreCase("halve")) {
-				a = (int) Math.floor(a/2);
+			} else if (s.equalsIgnoreCase("halve")) {
+				a = (int) Math.floor(a / 2);
 				return a;
 			}
 		}
@@ -96,14 +95,12 @@ public class Calculator {
 		int num2 = Integer.parseInt(tokens[2]);
 		int num3 = 0;
 		String operand = tokens[1];
-		
-		if(operand.equals("/") && num2 == 0) {
+
+		if (operand.equals("/") && num2 == 0) {
 			throw new ArithmeticException("Divide by 0 error");
-		}
-		else if (!operand.equals("+") && !operand.equals("-") && !operand.equals("/")) {
+		} else if (!operand.equals("+") && !operand.equals("-") && !operand.equals("/")) {
 			throw new CalculatorException("Invalid command");
-		}
-		else {
+		} else {
 			if (operand.equals("+")) {
 				num3 = num1 + num2;
 			}
@@ -114,7 +111,7 @@ public class Calculator {
 				num3 = num1 / num2;
 			}
 		}
-		
+
 		return num3;
 	}
 
@@ -158,7 +155,37 @@ public class Calculator {
 		// Condition on the number of tokens (number of strings in user input separated
 		// by spaces)
 		switch (tokens.length) {
-		// TODO: complete this...
+		// TODO: complete this.
+		case 0:
+			throw new CalculatorException("Illegal Token Length");
+		case 1: 
+			if (tokens[0].equalsIgnoreCase("quit")) {
+				return Integer.MIN_VALUE;
+			}
+			else {
+				throw new CalculatorException("Illegal Command");
+			}
+		case 2:
+			int a = Integer.parseInt(tokens[1]);
+			if (!tokens[0].equalsIgnoreCase("negate") && !tokens[0].equalsIgnoreCase("halve")) {
+				throw new CalculatorException("Invalid Command");
+			} else {
+				return calculateTwoTokens(tokens);
+			}
+
+		case 3:
+			int num1 = Integer.parseInt(tokens[0]);
+			int num2 = Integer.parseInt(tokens[2]);
+			if (tokens[1].equals("/") && num2 == 0) {
+				throw new ArithmeticException("Divide by 0 error");
+			} else if (!tokens[1].equals("+") && !tokens[1].equals("-") && !tokens[1].equals("/")) {
+				throw new CalculatorException("Invalid command");
+			}
+			else {
+				return calculateThreeTokens(tokens);
+			}
+		default:
+			throw new CalculatorException("Illegal Token Length");
 		}
 
 	}
