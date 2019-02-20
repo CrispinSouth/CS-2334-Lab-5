@@ -211,20 +211,42 @@ public class Calculator {
 	 *            command are separated by space. e.g. A valid command would be "50
 	 *            + 20". This will be split up (Tokenized) as an array of three
 	 *            Strings: ["50", "+", "20"].
-	 * @return The following values are returned under the given conditions: (1)
-	 *         "quit" - if the program should end (2) "The result is: %d", where %d
-	 *         is replaced with the returned value of execute(tokens) - the command
-	 *         is executed correctly and is not "quit". (3) "Attempted to divide by
-	 *         0. Please try again." - an ArithmeticException has been caught. (4)
-	 *         "Input number cannot be parsed to an int. Please try again." - a
-	 *         NumberFormat has been caught. (5) "Calculator Exception, message is:
-	 *         %s", where %s is the message of a CalculatorException - a
-	 *         CalculatorException has been caught.
+	 * @return The following values are returned under the given conditions: 
+	 * (1) "quit" - if the program should end 
+	 * (2) "The result is: %d", where %d is replaced with the returned value of execute(tokens) - 
+	 * 		the command is executed correctly and is not "quit". 
+	 * (3) "Attempted to divide by 0. Please try again." - an ArithmeticException has been caught. 
+	 * (4) "Input number cannot be parsed to an int. Please try again." - a NumberFormat has been caught. 
+	 * (5) "Calculator Exception, message is: %s", where %s is the message of a CalculatorException - a CalculatorException has been caught.
 	 */
 	public static String parseAndExecute(String input) {
 		// TODO: complete this...
 		// Hint: you should try and call execute(). If execute encounters an error, it
 		// will throw an exception. This
 		// method will catch those exceptions and respond accordingly.
+		
+		String[] tokens = input.split(" ");
+		int a = 0;
+		
+		try {
+			a = execute(tokens);
+			switch (a) {
+			case Integer.MIN_VALUE:
+				return "quit";
+			default:
+				return String.format("The result is: %d", a);
+			}
+			
+		}
+		catch (CalculatorException calc) {
+			return String.format("Calculator Exception, message is: %s", calc.getMessage());
+		}
+		catch (ArithmeticException arith) {
+			return "Attempted to divide by 0. Please try again.";
+		}
+		catch (NumberFormatException numb) {
+			return "Input number cannot be parsed to an int. Please try again.";
+		}
+		
 	}
 }
